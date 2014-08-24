@@ -9,4 +9,20 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-HearthstoneApp::Application.config.secret_key_base = 'fcdfa179a838757651b2337c6bd4fc0167bf7c0da51d4529fb7153a94cd305908871c53de359614cfa313eec0c1a7bbd8338617fd0269dee7f2f04e93581aaf3'
+
+require 'securerandom'
+
+def secure_token
+	token_file = Rails.root.join '.secret'
+	if File.exist? token_file
+		# use existing token
+		File.read(token_file).chomp
+	else
+		# gen a new token and store in token_file
+		token = SecureRandom.hex(64)
+		File.write(token_file, token)
+		token
+	end
+end
+
+HearthstoneApp::Application.config.secret_key_base = secure_token
