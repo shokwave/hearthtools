@@ -9,6 +9,8 @@ group :development, :test do
   gem 'rspec-rails', '2.13.1'
   gem 'pry-rails'
   gem 'awesome_print'
+  gem 'guard-rspec', '2.5.0'
+  gem 'growl', '1.0.3'
 end
 
 group :test do
